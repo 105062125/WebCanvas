@@ -36,6 +36,14 @@
         {
             position: absolute; left: 800px; top: 670px;
         }
+        #eraser
+        {
+            position: absolute; left: 1150px; top: 100px; background: "dog.png";
+        }
+        #eraser.active
+        {
+
+        }
         
     </style>
     <script>
@@ -124,6 +132,9 @@
 </div>
 <button id="clear" onclick="clearPad();">消除</button>
 <input type="button" id="bGenImage" value="輸出圖片" />
+<div>
+    <a id="eraser"><img src="dog.png" width="270" height="140"></a>
+</div>
 <div id="dOutput"></div>
 </body>
 </html>
