@@ -38,7 +38,7 @@
         }
         #eraser
         {
-            position: absolute; left: 1150px; top: 100px; background: "dog.png";
+            position: absolute; left: 1150px; top: 100px;
         }
         #eraser.active
         {
@@ -120,8 +120,15 @@
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle="white";
         ctx.fillRect(0,0,canvas.width,canvas.height);
-
-}
+        }
+        
+        var id = 1; 
+        function next(){  
+        if(id==1) id=2;
+        else id=1; 
+        document.getElementById("eraser").src = 'dog' + id + '.png'; //动态设定src  
+        console.log(id);  
+        }  
     </script>
 </head>
 <body background="back1.gif">
@@ -133,7 +140,7 @@
 <button id="clear" onclick="clearPad();">消除</button>
 <input type="button" id="bGenImage" value="輸出圖片" />
 <div>
-    <a id="eraser"><img src="dog.png" width="270" height="140"></a>
+    <img id="eraser" width="270" height="140" onclick='next();' src='dog1.png' />  
 </div>
 <div id="dOutput"></div>
 </body>
