@@ -7,10 +7,6 @@
     </script>
     <style>
         body,input { font-size: 9pt; }
-        #dCanvas
-        {
-            
-        }
         #dLine { clear: both; }
         .option
         {
@@ -32,6 +28,10 @@
         {
             position: absolute; left: 900px; top: 670px;
         }
+        #download
+        {
+            position: absolute; left: 700px; top: 670px;
+        }
         #clear
         {
             position: absolute; left: 800px; top: 670px;
@@ -43,9 +43,21 @@
         #happy
         {
             position: absolute; left: 1220px; top: 250px; font-size:20px; font-weight:bold; font-family: OCR A Std, monospace;
-            color:brown;
+            color:brown;background-color: rosybrown;
         }
-        
+        #brushshape
+        {
+            position: absolute; left: 1220px; top: 450px; font-size:20px; font-weight:bold; font-family: OCR A Std, monospace;
+            color:sienna; background-color: rosybrown;
+        }
+        #squarep
+        {
+            position: absolute; left: 1220px; top: 500px;
+        } 
+        #circlep
+        {
+            position: absolute; left: 1300px; top: 500px;
+        }
     </style>
     <script>
         $(function () {
@@ -85,6 +97,7 @@
             //取得canvas context
             var $canvas = $("#cSketchPad");
             var ctx = $canvas[0].getContext("2d");
+           
             ctx.lineCap = "round";
             ctx.fillStyle = "white"; //整個canvas塗上白色背景避免PNG的透明底色效果
             ctx.fillRect(0, 0, $canvas.width(), $canvas.height());
@@ -97,6 +110,7 @@
                 ctx.lineWidth = p_width;
                 ctx.moveTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
                 drawMode = true;
+                cPush();
             })
             .mousemove(function (e) {
                 if (drawMode) {
@@ -106,6 +120,11 @@
             })
             .mouseup(function (e) {
                 drawMode = false;
+                cPush();
+            })
+            .mouseleave(function(e){
+                drawMode = false;
+                cPush();
             });
             //利用.toDataqURL()將繪圖結果轉成圖檔
             $("#bGenImage").click(function () {
@@ -114,7 +133,10 @@
                     "class": "output"
                 }));
             });
+
         });
+
+
         function clearPad(){
         var canvas=document.querySelector('#cSketchPad');
         var ctx=canvas.getContext("2d");
@@ -125,21 +147,178 @@
 
         var id = 1; 
         function next(){  
-        if(id==1) id=2;
-        else id=1; 
-        document.getElementById("eraser").src = 'dog' + id + '.png'; //动态设定src  
-        console.log(id); 
-
+            if(id==1) id=2;
+            else id=1; 
+            document.getElementById("eraser").src = 'dog' + id + '.png'; //动态设定src  
+            console.log(id); 
+            if(id==2)
+            {
+                var p_color2 = p_color;
+                var p_width2 = p_width;
+                p_color = 'white';
+                p_width = 40;
+            } 
+        }
+      
         
-        if(id==2)
+        /*function drawBeauty(beauty){
+            var mycv
+            = document.getElementById("cSketchPad"); 
+            var myctx
+            = mycv.getContext("2d");
+            myctx.drawImage(beauty,
+            0, 0);
+            }
+            function load(){
+            var beauty
+            = new Image(); 
+            beauty.src
+            = "http://images.cnblogs.com/cnblogs_com/html5test/359114/r_test.jpg";
+            if(beauty.complete){
+            drawBeauty(beauty);
+            }else{
+            beauty.onload
+            = function(){
+                drawBeauty(beauty);
+            };
+            beauty.onerror
+            = function(){
+                window.alert('美女加载失败，请重试');
+            };
+            };  
+            }//load
+            if (document.all)
+            {
+            window.attachEvent('onload',
+            load);  
+            }else { 
+            window.addEventListener('load',
+            load, false);
+  }*/
+       /* function textinput()
         {
-            var p_color2 = p_color;
-            var p_width2 = p_width;
-            p_color = 'white';
-            p_width = 40;
-        } 
-        }  
+                var canvas = document.getElementById('cSketchPad'),
+                ctx = canvas.getContext('2d'),
+                font = '50px sans-serif',
+                hasInput = false;
+
+            canvas.onclick = function(e) {
+                if (hasInput) return;
+                addInput(e.clientX, e.clientY);
+            }
+
+            function addInput(x, y) {
+                
+                var input = document.createElement('input');
+                
+                input.type = 'text';
+                input.style.position = 'fixed';
+                input.style.left = (x - 4) + 'px';
+                input.style.top = (y - 4) + 'px';
+
+                input.onkeydown = handleEnter;
+                
+                document.body.appendChild(input);
+
+                input.focus();
+                
+                hasInput = true;
+            }
+
+            function handleEnter(e) {
+                var keyCode = e.keyCode;
+                if (keyCode === 13) {
+                    drawText(this.value, parseInt(this.style.left, 10), parseInt(this.style.top, 10));
+                    document.body.removeChild(this);
+                    hasInput = false;
+                }
+            }
+
+            function drawText(txt, x, y) {
+                ctx.textBaseline = 'top';
+                ctx.textAlign = 'left';
+                ctx.font = font;
+                ctx.fillText(txt, x - 4, y - 4);
+            }
+        }*/
+        /*function doInput(id){
+        var inputObj = document.createElement('input');
+        inputObj.addEventListener('change',readFile,false);
+        inputObj.type = 'file';
+        inputObj.accept = 'image/*';
+        inputObj.id = id;
+        inputObj.click();
+        }
+        
+        function readFile(){
+        var file = this.files[0];//获取input输入的图片
+        if(!/image\/\w+/.test(file.type)){
+            alert("请确保文件为图像类型");
+            return false;
+        }//判断是否图片，在移动端由于浏览器对调用file类型处理不同，虽然加了accept = 'image/*'，但是还要再次判断
+        var reader = new FileReader();
+        reader.readAsDataURL(file);//转化成base64数据类型
+        reader.onload = function(e){
+                drawToCanvas(this.result);
+        }
+        }
+        
+        function drawToCanvas(imgData){
+        var cvs = document.querySelector('#cSketchPad');
+        cvs.width=300;
+        cvs.height=400;
+        var ctx = cvs.getContext('2d');
+        var img = new Image;
+            img.src = imgData;
+            img.onload = function(){//必须onload之后再画
+                ctx.drawImage(img,0,0,300,400);
+                strDataURI = cvs.toDataURL();//获取canvas base64数据
+            }
+}*/
+        function download(){
+            var canvas=document.querySelector('#cSketchPad');
+            var ctx=canvas.getContext("2d");
+            var base64Img = canvas.toDataURL();
+            var oA = document.createElement('a');
+            oA.href = base64Img;
+            oA.download = 'kevin_painter.png';
+
+            var event = document.createEvent('MouseEvents');
+            event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            oA.dispatchEvent(event);
+        };
+        
+        function circlef()
+        {
+            var $canvas = $("#cSketchPad");
+            var ctx = $canvas[0].getContext("2d");
+            ctx.lineCap = "round";
+        }
+
+        function squaref()
+        {
+            var $canvas = $("#cSketchPad");
+            var ctx = $canvas[0].getContext("2d");
+            ctx.lineCap = "square";
+        }
+        
+        function rec()
+        {
+            
+            var canvas = document.getElementById("cSketchPad");
+            var context = canvas.getContext("2d");
+            var x = 50;
+            var y = 50;
+            var width = 300;
+            var height = 100;
+            context.beginPath();
+            context.rect(x, y, e.pageX - canvas.position().left, e.pageY - canvas.position().top);
+            context.fillStyle = "#F76541";
+            context.fill();
+        }
+       
     </script>
+    
 </head>
 <body background="back1.gif">
 <div id="dPallete"></div>
@@ -147,12 +326,21 @@
 <div id="dCanvas">
 <canvas id="cSketchPad" width="550" height="550" style="border: 2px solid gray" />
 </div>
+<button id="redo" onclick="rec();">矩形</button>
+<button id='drawtext'onclick='textinput();'>Draw Text</button>
+<button id="undo" onclick="cUndo();">undo</button>
+<button id="redo" onclick="cRedo();">redo</button>
 <button id="clear" onclick="clearPad();">消除</button>
+<button id="download" onclick="download();">下載圖片</button>
+<input type="file" id="photo" accept="image/*" capture="camera">
 <input type="button" id="bGenImage" value="輸出圖片" />
 <div>
     <img id="eraser" width="270" height="140" onclick='next();' src='dog1.png' />  
 </div>
-<div id="happy">Eraser Function<br>(Happy...)<br>Remember to choose new color & brush</div>
+<img id="circlep" width="50" height="50" onclick="circlef();" src='circle.png' /> 
+<img id="squarep" width="50" height="50" onclick="squaref();" src='square.png' /> 
+<div id="happy">橡皮擦(點擊柴柴)<br>記得重選顏色和粗度</div>
+<div id="brushshape">筆頭(些微差異)</div>
 <div id="dOutput"></div>
 </body>
 </html>
