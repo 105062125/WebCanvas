@@ -43,7 +43,7 @@
         #happy
         {
             position: absolute; left: 1220px; top: 250px; font-size:20px; font-weight:bold; font-family: OCR A Std, monospace;
-            color: blue;
+            color:brown;
         }
         
     </style>
@@ -130,16 +130,14 @@
         document.getElementById("eraser").src = 'dog' + id + '.png'; //动态设定src  
         console.log(id); 
 
-            
+        
         if(id==2)
         {
             var p_color2 = p_color;
+            var p_width2 = p_width;
             p_color = 'white';
+            p_width = 40;
         } 
-        else
-        {
-            p_color = p_color2;
-        }
         }  
     </script>
 </head>
@@ -154,7 +152,7 @@
 <div>
     <img id="eraser" width="270" height="140" onclick='next();' src='dog1.png' />  
 </div>
-<div id="happy">Eraser Function<br>(Happy...)</div>
+<div id="happy">Eraser Function<br>(Happy...)<br>Remember to choose new color & brush</div>
 <div id="dOutput"></div>
 </body>
 </html>
