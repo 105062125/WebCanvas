@@ -1,346 +1,101 @@
 <!DOCTYPE html>
- 
 <html>
 <head>
-    <title>HTML5 Canvas塗鴉板</title>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.4.js">
-    </script>
-    <style>
-        body,input { font-size: 9pt; }
-        #dLine { clear: both; }
-        .option
-        {
-            position:relative;left: 650px;
-            float: left; width: 40px; height:40px; border: 2px solid #cccccc;
-            margin-left: 4px; margin-right: 4px; margin-bottom: 4px;
-        }
-        .active { border: 2px solid black; }
-        .lw { text-align: center; vertical-align: middle; }
-        img.output 
-        { 
-            border: 1px solid green; position:absolute; left:25px; top: 103px;
-        }
-        #cSketchPad 
-        {
-             cursor: arrow; position: absolute; left:605px; top: 103px;
-        }
-        #bGenImage
-        {
-            position: absolute; left: 900px; top: 670px;
-        }
-        #download
-        {
-            position: absolute; left: 700px; top: 670px;
-        }
-        #clear
-        {
-            position: absolute; left: 800px; top: 670px;
-        }
-        #eraser
-        {
-            position: absolute; left: 1150px; top: 100px;
-        }
-        #happy
-        {
-            position: absolute; left: 1220px; top: 250px; font-size:20px; font-weight:bold; font-family: OCR A Std, monospace;
-            color:brown;background-color: rosybrown;
-        }
-        #brushshape
-        {
-            position: absolute; left: 1220px; top: 450px; font-size:20px; font-weight:bold; font-family: OCR A Std, monospace;
-            color:sienna; background-color: rosybrown;
-        }
-        #squarep
-        {
-            position: absolute; left: 1220px; top: 500px;
-        } 
-        #circlep
-        {
-            position: absolute; left: 1300px; top: 500px;
-        }
-    </style>
-    <script>
-        $(function () {
-            //產生不同顏色的div方格當作調色盤選項
-            var colors =
-            "red;orange;yellow;green;blue;indigo;purple;black;white".split(';');
-            var sb = [];
-            $.each(colors, function (i, v) {
-                sb.push("<div class='option' style='background-color:" + v + "'></div>");
-            });
-            $("#dPallete").html(sb.join("\n"));
-            //產生不同尺寸的方格當作線條粗細選項
-            sb = [];
-            for (var i = 1; i <= 9; i++)
-                sb.push("<div class='option lw'>" +
-         "<div style='margin-top:#px;margin-left:#px;width:%px;height:%px'></div></div>"
-                .replace(/%/g, i).replace(/#/g, 10 - i / 2));
-            $("#dLine").html(sb.join('\n'));
-            var $clrs = $("#dPallete .option");
-            var $lws = $("#dLine .option");
-            //點選調色盤時切換焦點並取得顏色存入p_color，
-            //同時變更線條粗細選項的方格的顏色
-            $clrs.click(function () {
-                $clrs.removeClass("active");
-                $(this).addClass("active");
-                p_color = this.style.backgroundColor;
-                $lws.children("div").css("background-color", p_color);
-            }).first().click();
-            //點選線條粗細選項時切換焦點並取得寬度存入p_width
-            $lws.click(function () {
-                $lws.removeClass("active");
-                $(this).addClass("active");
-                p_width =
-                    $(this).children("div").css("width").replace("px", "");
- 
-            }).eq(3).click();
-            //取得canvas context
-            var $canvas = $("#cSketchPad");
-            var ctx = $canvas[0].getContext("2d");
-           
-            ctx.lineCap = "round";
-            ctx.fillStyle = "white"; //整個canvas塗上白色背景避免PNG的透明底色效果
-            ctx.fillRect(0, 0, $canvas.width(), $canvas.height());
-            var drawMode = false;
-
-            //canvas點選、移動、放開按鍵事件時進行繪圖動作
-            $canvas.mousedown(function (e) {
-                ctx.beginPath();
-                ctx.strokeStyle = p_color;
-                ctx.lineWidth = p_width;
-                ctx.moveTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
-                drawMode = true;
-                cPush();
-            })
-            .mousemove(function (e) {
-                if (drawMode) {
-                    ctx.lineTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
-                    ctx.stroke();
-                }
-            })
-            .mouseup(function (e) {
-                drawMode = false;
-                cPush();
-            })
-            .mouseleave(function(e){
-                drawMode = false;
-                cPush();
-            });
-            //利用.toDataqURL()將繪圖結果轉成圖檔
-            $("#bGenImage").click(function () {
-                $("#dOutput").html(
-                $("<img />", { src: $canvas[0].toDataURL(),
-                    "class": "output"
-                }));
-            });
-
-        });
-
-
-        function clearPad(){
-        var canvas=document.querySelector('#cSketchPad');
-        var ctx=canvas.getContext("2d");
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle="white";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        }
-
-        var id = 1; 
-        function next(){  
-            if(id==1) id=2;
-            else id=1; 
-            document.getElementById("eraser").src = 'dog' + id + '.png'; //动态设定src  
-            console.log(id); 
-            if(id==2)
-            {
-                var p_color2 = p_color;
-                var p_width2 = p_width;
-                p_color = 'white';
-                p_width = 40;
-            } 
-        }
-      
-        
-        /*function drawBeauty(beauty){
-            var mycv
-            = document.getElementById("cSketchPad"); 
-            var myctx
-            = mycv.getContext("2d");
-            myctx.drawImage(beauty,
-            0, 0);
-            }
-            function load(){
-            var beauty
-            = new Image(); 
-            beauty.src
-            = "http://images.cnblogs.com/cnblogs_com/html5test/359114/r_test.jpg";
-            if(beauty.complete){
-            drawBeauty(beauty);
-            }else{
-            beauty.onload
-            = function(){
-                drawBeauty(beauty);
-            };
-            beauty.onerror
-            = function(){
-                window.alert('美女加载失败，请重试');
-            };
-            };  
-            }//load
-            if (document.all)
-            {
-            window.attachEvent('onload',
-            load);  
-            }else { 
-            window.addEventListener('load',
-            load, false);
-  }*/
-       /* function textinput()
-        {
-                var canvas = document.getElementById('cSketchPad'),
-                ctx = canvas.getContext('2d'),
-                font = '50px sans-serif',
-                hasInput = false;
-
-            canvas.onclick = function(e) {
-                if (hasInput) return;
-                addInput(e.clientX, e.clientY);
-            }
-
-            function addInput(x, y) {
-                
-                var input = document.createElement('input');
-                
-                input.type = 'text';
-                input.style.position = 'fixed';
-                input.style.left = (x - 4) + 'px';
-                input.style.top = (y - 4) + 'px';
-
-                input.onkeydown = handleEnter;
-                
-                document.body.appendChild(input);
-
-                input.focus();
-                
-                hasInput = true;
-            }
-
-            function handleEnter(e) {
-                var keyCode = e.keyCode;
-                if (keyCode === 13) {
-                    drawText(this.value, parseInt(this.style.left, 10), parseInt(this.style.top, 10));
-                    document.body.removeChild(this);
-                    hasInput = false;
-                }
-            }
-
-            function drawText(txt, x, y) {
-                ctx.textBaseline = 'top';
-                ctx.textAlign = 'left';
-                ctx.font = font;
-                ctx.fillText(txt, x - 4, y - 4);
-            }
-        }*/
-        /*function doInput(id){
-        var inputObj = document.createElement('input');
-        inputObj.addEventListener('change',readFile,false);
-        inputObj.type = 'file';
-        inputObj.accept = 'image/*';
-        inputObj.id = id;
-        inputObj.click();
-        }
-        
-        function readFile(){
-        var file = this.files[0];//获取input输入的图片
-        if(!/image\/\w+/.test(file.type)){
-            alert("请确保文件为图像类型");
-            return false;
-        }//判断是否图片，在移动端由于浏览器对调用file类型处理不同，虽然加了accept = 'image/*'，但是还要再次判断
-        var reader = new FileReader();
-        reader.readAsDataURL(file);//转化成base64数据类型
-        reader.onload = function(e){
-                drawToCanvas(this.result);
-        }
-        }
-        
-        function drawToCanvas(imgData){
-        var cvs = document.querySelector('#cSketchPad');
-        cvs.width=300;
-        cvs.height=400;
-        var ctx = cvs.getContext('2d');
-        var img = new Image;
-            img.src = imgData;
-            img.onload = function(){//必须onload之后再画
-                ctx.drawImage(img,0,0,300,400);
-                strDataURI = cvs.toDataURL();//获取canvas base64数据
-            }
-}*/
-        function download(){
-            var canvas=document.querySelector('#cSketchPad');
-            var ctx=canvas.getContext("2d");
-            var base64Img = canvas.toDataURL();
-            var oA = document.createElement('a');
-            oA.href = base64Img;
-            oA.download = 'kevin_painter.png';
-
-            var event = document.createEvent('MouseEvents');
-            event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-            oA.dispatchEvent(event);
-        };
-        
-        function circlef()
-        {
-            var $canvas = $("#cSketchPad");
-            var ctx = $canvas[0].getContext("2d");
-            ctx.lineCap = "round";
-        }
-
-        function squaref()
-        {
-            var $canvas = $("#cSketchPad");
-            var ctx = $canvas[0].getContext("2d");
-            ctx.lineCap = "square";
-        }
-        
-        function rec()
-        {
-            
-            var canvas = document.getElementById("cSketchPad");
-            var context = canvas.getContext("2d");
-            var x = 50;
-            var y = 50;
-            var width = 300;
-            var height = 100;
-            context.beginPath();
-            context.rect(x, y, e.pageX - canvas.position().left, e.pageY - canvas.position().top);
-            context.fillStyle = "#F76541";
-            context.fill();
-        }
-       
-    </script>
-    
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body background="back1.gif">
-<div id="dPallete"></div>
-<div id="dLine"></div>
-<div id="dCanvas">
-<canvas id="cSketchPad" width="550" height="550" style="border: 2px solid gray" />
+
+<script src="assets/js/jquery-2.2.3.min.js"></script>
+<script src="assets/js/setting.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/shapes/Point.js"></script>
+<script src="assets/js/shapes/Shape.js"></script>
+<script src="assets/js/shapes/basic/Rectangle.js"></script>
+<script src="assets/js/shapes/basic/Equilateral.js"></script>
+<script src="assets/js/shapes/basic/Ellipse.js"></script>
+
+<script>
+
+function download(type) {
+    //设置保存图片的类型
+    var imgdata = canvas.toDataURL(type);
+    //将mime-type改为image/octet-stream,强制让浏览器下载
+    var fixtype = function (type) {
+        type = type.toLocaleLowerCase().replace(/jpg/i, 'jpeg');
+        var r = type.match(/png|jpeg|bmp|gif/)[0];
+        return 'image/' + r;
+    }
+    imgdata = imgdata.replace(fixtype(type), 'image/octet-stream')
+    //将图片保存到本地
+    var saveFile = function (data, filename) {
+        var link = document.createElement('a');
+        link.href = data;
+        link.download = filename;
+        var event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        link.dispatchEvent(event);
+    }
+    var filename = new Date().toLocaleDateString() + '.' + type;
+    saveFile(imgdata, filename);
+}
+
+
+</script>
+
+<body onload="init()" background="back1.jpg">
+  <div id="canword">CANVAS<br>TIME</div>
+  <div id="editor">Kevin's Canvas</div>
+  <div id="bgwhite"></div>
+  <a class="circlep" onclick="circlef();">圓形筆觸</a>
+  <a class="squarep" onclick="squaref();">方形筆觸</a>
+  <a class="undo" id="undo" onclick="cUndo();">Undo</a>
+  <a class="redo" id="redo" onclick="cRedo();">Redo</a>
+  <header>
+        <input id="text" onclick="chooseTool(this.id)" type="image" alt="" src="text.png" width="70px" height="70px">
+        <input id="pencil" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/pencil.png" width="90px" height="90px">
+        <input id="eraser" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/eraser.png" width="100px" height="100px">
+        <input id="equilateral" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/equilateral.png" width="75px" height="75px">
+        <input id="ellipse" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/ellipse.png" width="75px" height="75px">
+        <input id="rectangle" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/rectangle.png" width="70px" height="70px">
+        <div class="color-box-quick active" id="color-quick-1" style="background:black" onclick="chooseColor(this.id)"></div>
+        <div class="color-box-quick" id="color-quick-2" style="background:white" onclick="chooseColor(this.id)"></div>
+      <div class="color-boxx">
+       
+      <div style="float:left; padding:10px 10px 0px 10px;">
+        <ul>
+          <li><div id="#FF0000" style="background:#FF0000" onclick="pickColor(this.id)"></div></li>
+          <li><div id="#00FF00" style="background:#00FF00" onclick="pickColor(this.id)"></div></li>
+          <li><div id="#0000FF" style="background:#0000FF" onclick="pickColor(this.id)"></div></li>
+          <li><div id="#FFFF00" style="background:#FFFF00" onclick="pickColor(this.id)"></div></li>
+        </ul>
+        <ul>
+          <li><div id="#FF00FF" style="background:#FF00FF" onclick="pickColor(this.id)"></div></li>
+          <li><div id="#00FFFF" style="background:#00FFFF" onclick="pickColor(this.id)"></div></li>
+          <li><div id="#FFFFFF" style="background:#FFFFFF" onclick="pickColor(this.id)"></div></li>
+          <li><div id="#000000" style="background:#000000" onclick="pickColor(this.id)"></div></li>
+        </ul>
+      </div>
+      <input id="inputcolor" onchange="pickColor(this.value)" type="color" name="favcolor">
+
+    </div>
+    <!-- Setting -->
+    
+    <div class="setting-box">
+      
+        <input type="range" id="rangeThickness" value="20" onchange="changeThickness(this.value)">
+      
+      <hr id="rangeDemo"><span id="rangeValue">2px</span>
+   </div>
+   <button id="download" onclick="download('png');">下載圖片</button>
+   <a class="clear" onclick="clearPad();">清除</a>
+   
+ </header>
+
+ <div class="wrapper">
+  <canvas id="canvasGrid" style="border: 20px solid rgba(155, 209, 200, 0.267)"></canvas>
+  <canvas id="canvas" style="border: 20px solid rgba(155, 209, 200, 0.267)"></canvas>
+  <canvas id="canvasTmp" style="border: 20px solid rgba(155, 209, 200, 0.267)"></canvas>
 </div>
-<button id="redo" onclick="rec();">矩形</button>
-<button id='drawtext'onclick='textinput();'>Draw Text</button>
-<button id="undo" onclick="cUndo();">undo</button>
-<button id="redo" onclick="cRedo();">redo</button>
-<button id="clear" onclick="clearPad();">消除</button>
-<button id="download" onclick="download();">下載圖片</button>
-<input type="file" id="photo" accept="image/*" capture="camera">
-<input type="button" id="bGenImage" value="輸出圖片" />
-<div>
-    <img id="eraser" width="270" height="140" onclick='next();' src='dog1.png' />  
-</div>
-<img id="circlep" width="50" height="50" onclick="circlef();" src='circle.png' /> 
-<img id="squarep" width="50" height="50" onclick="squaref();" src='square.png' /> 
-<div id="happy">橡皮擦(點擊柴柴)<br>記得重選顏色和粗度</div>
-<div id="brushshape">筆頭(些微差異)</div>
-<div id="dOutput"></div>
 </body>
 </html>
