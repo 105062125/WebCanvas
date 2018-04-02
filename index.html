@@ -41,28 +41,33 @@ function download() {
     saveFile(imgdata, filename);
 }
 
+function test1()
+{
+  fileUpload.click();  
+  textfield.value = upload.value;  
+}
+
 
 </script>
 
 <body onload="init()" background="back1.jpg">
-    <input type="file" id="fileUpload" accept="image/*" />
+
+    <input type="file" id="fileUpload" accept="image/*" style="display:none" name="upload"/> 
+    <input   id ="fakepic" type="image"   src="upload.png"   onclick="test1()" width="50px" height="50px"> 
+
     <select class="custom-select" id="inputGroupSelect01" onChange="change_font(this.selectedIndex);">
         <option selected>Arial</option>
-        <option>Verdana</option>
-        <option>Courier New</option>
-        <option>serif</option>
-        <option>sans-serif</option>
         <option>微軟正黑體</option>
         <option>新細明體</option>
         <option>標楷體</option>
-    </select>
+      </select>
   <div id="canword">CANVAS<br>TIME</div>
   <div id="editor">Kevin's Canvas</div>
   <div id="bgwhite"></div>
   
   
   <header>
-    
+
     <div class="toolhov">
         <input id="download" onclick="download();" type="image" alt="" src="download.png" width="50px" height="50px">
         <input id="clear" onclick="clearPad();" type="image" alt="" src="clear.png" width="50px" height="50px">

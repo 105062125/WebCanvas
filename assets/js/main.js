@@ -14,11 +14,6 @@ function handleToolDown(e){
     curColor = RGBtoHex(imgData);
     curColorBox.style.background = curColor;
   }
-  if (currentTool == 'fillcolor'){
-    var originColor = imgData;
-    var replaceColor = HextoRGB(curColor);
-    floodFill(curX, curY, originColor, replaceColor);
-  }
   if (currentTool == 'eraser'){
     ctx.globalCompositeOperation = 'destination-out';
   }
@@ -166,22 +161,14 @@ function drawText(txt, x, y) {
 function change_font(f) {
   if (f == 0) {
     font_name = 'Arial';
-  } else if (f == 1) {
-    font_name = 'Verdana';
-  } else if (f == 2) {
-    font_name = 'Courier New';
-  } else if (f == 3) {
-    font_name = 'serif';
-  } else if (f == 4) {
-    font_name = 'sans-serif';
   }
-  else if (f == 5) {
+  else if (f == 1) {
     font_name = '微軟正黑體';
   }
-  else if (f == 6) {
+  else if (f == 2) {
     font_name = '新細明體';
   }
-  else if (f == 7) {
+  else if (f == 3) {
     font_name = '標楷體';
   }
 }
