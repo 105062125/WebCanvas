@@ -96,7 +96,6 @@ function init() {
 
   w = canvas.width;
   h = canvas.height;
-
   canvas.addEventListener('mousedown', function (e){ handleToolDown(e) }, false);
   canvas.addEventListener('mouseup', function (e){ handleToolUp(e) }, false);
   canvas.addEventListener('mousemove', function (e){ handleToolMove(e) }, true);

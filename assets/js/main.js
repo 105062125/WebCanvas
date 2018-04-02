@@ -2,8 +2,8 @@
 //***TOOLS***
 //***********
 function handleToolDown(e){
-  curX = e.clientX - canvas.offsetLeft;
-  curY = e.clientY - canvas.offsetTop + 18;//height of icon
+  curX = e.clientX - canvas.offsetLeft - 17 ;
+  curY = e.clientY - canvas.offsetTop  + 37;//height of icon
 
   flagTool = true;
   preX = curX;
@@ -42,8 +42,8 @@ function handleToolUp(e){
 }
 
 function handleToolMove(e){
-  curX = e.clientX - canvas.offsetLeft;
-  curY = e.clientY - canvas.offsetTop + 18;//height of icon
+  curX = e.clientX - canvas.offsetLeft -17 ;
+  curY = e.clientY - canvas.offsetTop + 37 ;//height of icon
 
   if (currentTool == 'pencil' && flagTool || currentTool == 'eraser' && flagTool){
     ctx.beginPath();
@@ -155,11 +155,12 @@ function handleEnter(e) {
 }
 
 function drawText(txt, x, y) {
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = curColor;
   ctx.textBaseline = 'top';
   ctx.textAlign = 'left';
   ctx.font = font;
   ctx.fillText(txt, x - 400, y -120);
+  cPush();
   
 }
 function change_font(f) {
@@ -200,6 +201,7 @@ function handleShapeDown(e){
 function handleShapeUp(e){
 
   flagShape = false;
+  cPush();
   if (currentShape == 'polygon'){
     currentShapeObj.addNewLine(ctxTmp);
     return;

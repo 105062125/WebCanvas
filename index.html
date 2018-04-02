@@ -17,7 +17,8 @@
 
 <script>
 
-function download(type) {
+function download() {
+    var type = 'png';
     //设置保存图片的类型
     var imgdata = canvas.toDataURL(type);
     //将mime-type改为image/octet-stream,强制让浏览器下载
@@ -58,18 +59,23 @@ function download(type) {
   <div id="canword">CANVAS<br>TIME</div>
   <div id="editor">Kevin's Canvas</div>
   <div id="bgwhite"></div>
-  <a class="circlep" onclick="circlef();">圓形筆觸</a>
-  <a class="squarep" onclick="squaref();">方形筆觸</a>
-  <a class="undo" id="undo" onclick="cUndo();">Undo</a>
-  <a class="redo" id="redo" onclick="cRedo();">Redo</a>
+  
+  
   <header>
+    
     <div class="toolhov">
-        <input id="text" onclick="chooseTool(this.id)" type="image" alt="" src="text.png" width="70px" height="70px">
-        <input id="pencil" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/pencil.png" width="90px" height="90px">
-        <input id="eraser" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/eraser.png" width="100px" height="100px">
-        <input id="equilateral" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/equilateral.png" width="75px" height="75px">
-        <input id="ellipse" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/ellipse.png" width="75px" height="75px">
-        <input id="rectangle" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/rectangle.png" width="70px" height="70px">
+        <input id="download" onclick="download();" type="image" alt="" src="download.png" width="50px" height="50px">
+        <input id="clear" onclick="clearPad();" type="image" alt="" src="clear.png" width="50px" height="50px">
+        <input id="circlep" onclick="circlef();" type="image" alt="" src="circle_brush.png" width="50px" height="50px">
+        <input id="squarep" onclick="squaref();" type="image" alt="" src="flat_brush.png" width="50px" height="50px">
+        <input class="undo" id="undo" onclick="cUndo();" type="image" alt="" src="undo.png" width="50px" height="50px">
+        <input class="redo" id="redo" onclick="cRedo();" type="image" alt="" src="redo.png" width="50px" height="50px">
+        <input id="text" onclick="chooseTool(this.id)" type="image" alt="" src="text.png" width="50px" height="50px">
+        <input id="pencil" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/pencil1.png" width="50px" height="50px">
+        <input id="eraser" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/eraser1.png" width="50px" height="50px">
+        <input id="equilateral" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/equilateral1.png" width="50px" height="50px">
+        <input id="ellipse" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/ellipse1.png" width="50px" height="50px">
+        <input id="rectangle" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/rectangle1.png" width="50px" height="50px">
     </div>    
         <div class="color-box-quick active" id="color-quick-1" style="background:black" onclick="chooseColor(this.id)"></div>
         <div class="color-box-quick" id="color-quick-2" style="background:white" onclick="chooseColor(this.id)"></div>
@@ -100,8 +106,8 @@ function download(type) {
       
       <hr id="rangeDemo"><span id="rangeValue">2px</span>
    </div>
-   <button id="download" onclick="download('png');">下載圖片</button>
-   <a class="clear" onclick="clearPad();">清除</a>
+   
+   
    
  </header>
 
