@@ -51,11 +51,11 @@ canvas{
 
 #circlep
 {
-	position: absolute;  left:1120px; top: 385px;
+	position: absolute;  left:1120px; top: 200px;
 }
 #squarep
 {
-	position: absolute;  left:1220px; top: 385px;
+	position: absolute;  left:1220px; top: 200px;
 }
 
 
@@ -77,7 +77,7 @@ canvas{
 }
 
 .color-boxx {
-    position: absolute;  left:1170px; top: 185px; 
+    position: absolute;  left:1070px; top: 540px; 
 }
 .color-boxx ul li{
     float: left;
@@ -134,8 +134,8 @@ span {
 
 
 
-.setting-box{
-    position: absolute;  left:1200px; top: 300px;
+.setting-box{  /*長度*/
+    position: absolute;  left:1230px; top: 630px;
 }
 
 #rangeThickness{
@@ -156,11 +156,11 @@ span {
 
 #download
 {
-    position: absolute;  left:1220px; top: 480px;
+    position: absolute;  left:1220px; top: 290px;
 }
 #clear
 {
-	position: absolute;  left:1115px; top: 480px;
+	position: absolute;  left:1115px; top: 290px;
 }
 
 #text
@@ -209,7 +209,7 @@ input[type="text"]{padding:5px 15px; border:2px black solid;
 #fakepic
 {
     position: absolute;
-    left:1115px; top: 588px;
+    left:1115px; top: 385px;
 }
 
 .custom-select {
