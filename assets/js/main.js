@@ -131,9 +131,11 @@ function addInput(x, y) {
   
   input.type = 'text';
   input.style.position = 'fixed';
+  input.placeholder = '輸入文字';
   input.style.left = (x - 4) + 'px';
   input.style.top = (y - 4) + 'px';
-
+  font = curWidth * 8 + 'px ' + font_name;
+  input.style.font = font;
   input.onkeydown = handleEnter;
   
   document.body.appendChild(input);
@@ -159,6 +161,28 @@ function drawText(txt, x, y) {
   ctx.font = font;
   ctx.fillText(txt, x - 400, y -120);
   
+}
+function change_font(f) {
+  if (f == 0) {
+    font_name = 'Arial';
+  } else if (f == 1) {
+    font_name = 'Verdana';
+  } else if (f == 2) {
+    font_name = 'Courier New';
+  } else if (f == 3) {
+    font_name = 'serif';
+  } else if (f == 4) {
+    font_name = 'sans-serif';
+  }
+  else if (f == 5) {
+    font_name = '微軟正黑體';
+  }
+  else if (f == 6) {
+    font_name = '新細明體';
+  }
+  else if (f == 7) {
+    font_name = '標楷體';
+  }
 }
 //***********
 //***SHAPE***

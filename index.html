@@ -44,6 +44,17 @@ function download(type) {
 </script>
 
 <body onload="init()" background="back1.jpg">
+    <input type="file" id="fileUpload" accept="image/*" />
+    <select class="custom-select" id="inputGroupSelect01" onChange="change_font(this.selectedIndex);">
+        <option selected>Arial</option>
+        <option>Verdana</option>
+        <option>Courier New</option>
+        <option>serif</option>
+        <option>sans-serif</option>
+        <option>微軟正黑體</option>
+        <option>新細明體</option>
+        <option>標楷體</option>
+    </select>
   <div id="canword">CANVAS<br>TIME</div>
   <div id="editor">Kevin's Canvas</div>
   <div id="bgwhite"></div>
@@ -52,12 +63,14 @@ function download(type) {
   <a class="undo" id="undo" onclick="cUndo();">Undo</a>
   <a class="redo" id="redo" onclick="cRedo();">Redo</a>
   <header>
+    <div class="toolhov">
         <input id="text" onclick="chooseTool(this.id)" type="image" alt="" src="text.png" width="70px" height="70px">
         <input id="pencil" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/pencil.png" width="90px" height="90px">
         <input id="eraser" onclick="chooseTool(this.id)" type="image" alt="" src="assets/img/tools/eraser.png" width="100px" height="100px">
         <input id="equilateral" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/equilateral.png" width="75px" height="75px">
         <input id="ellipse" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/ellipse.png" width="75px" height="75px">
         <input id="rectangle" onclick="chooseShape(this.id)" type="image" alt="" src="assets/img/shapes/rectangle.png" width="70px" height="70px">
+    </div>    
         <div class="color-box-quick active" id="color-quick-1" style="background:black" onclick="chooseColor(this.id)"></div>
         <div class="color-box-quick" id="color-quick-2" style="background:white" onclick="chooseColor(this.id)"></div>
       <div class="color-boxx">

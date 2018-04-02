@@ -3,9 +3,10 @@ var curX = 0, curY = 0, preX = -1, preY = -1;
 var curColorBox, curColor = '#000000', curWidth = 2;
 var cPushArray = new Array();
 var cStep = -1;
-var font = "50px sans-serif";
 var hasInput = false;
 var flagShape = false, flagTool = false;
+var font = '59px sans-serif';
+var font_name = 'Arial';
 
 if (currentShape == 'polygon'){
   currentShapeObj.finish()
@@ -104,7 +105,7 @@ function init() {
   canvasTmp.addEventListener('mouseup', function (e){ handleShapeUp(e) }, false);
   canvasTmp.addEventListener('mousemove', function (e){ handleShapeMove(e) }, false);
 
-  
+  document.getElementById("fileUpload").addEventListener("change",readImage,false);
   //Tmp layers
   canvasTmp.style.display = 'none';
   //Painting
@@ -175,5 +176,39 @@ function cRedo() {
       var canvasPic = new Image();
       canvasPic.src = cPushArray[cStep];
       canvasPic.onload = function () { ctx.drawImage(canvasPic, 0, 0); }
+  }
+}
+
+function readImage(){
+  canvas = document.getElementById('canvas');
+  canvasGrid = document.getElementById('canvasGrid');
+  canvasTmp = document.getElementById('canvasTmp');
+
+  canvas.width = 650;  //畫圖的地方的長寬
+  canvas.height = 570;
+  canvasGrid.width = canvas.width;
+  canvasGrid.height = canvas.height;
+  canvasTmp.width = canvas.width;
+  canvasTmp.height = canvas.height;
+
+  ctx = canvas.getContext('2d');
+  ctxGrid = canvasGrid.getContext('2d');
+  ctxTmp = canvasTmp.getContext('2d');
+
+  w = canvas.width;
+  h = canvas.height;
+  if(this.files&&this.files[0]){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    
+    var FR = new FileReader();
+    FR.onload = function(event) {
+      var img = new Image();
+      img.addEventListener("load", function() {
+        ctx.drawImage(img, 0, 0,canvas.width, canvas.height);
+        cPush();
+      });
+      img.src = event.target.result;
+    };       
+    FR.readAsDataURL( this.files[0] );
   }
 }

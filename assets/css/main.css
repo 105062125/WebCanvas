@@ -107,9 +107,12 @@ span {
     padding: 10px;
 }
 
-.tool-box ul li:hover{                       /**/
-    background-color: rgb(20, 189, 104);
+.toolhov :hover
+{
+	background-color: rgba(0, 238, 255, 0.295);
 }
+
+
 
 .setting-box{
     position: absolute;  left:1200px; top: 300px;
@@ -422,6 +425,21 @@ span {
     left:1220px; top: 401px;
 }
 
+input[type="text"]{padding:5px 15px; border:2px black solid;
+	cursor:pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; }
+
+#inputGroupSelect01
+{
+	position: absolute;  left:310px; top: 685px;
+}
+
+#fileUpload
+{
+	position: absolute;
+    left:1100px; top: 565px;
+}
 
 
 
