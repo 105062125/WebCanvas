@@ -35,9 +35,15 @@
     
 ----------------------------------------------------------------------------------------------
 
-#My functions of my canvas
+#My functions of my canvas<br>
 
+開始-前景圖片
+<img src="start.JPG" width="600px" height="400px"></img><br>
+<br>
+
+使用畫面
 <img src="canvas.JPG" width="600px" height="400px"></img><br>
+
 
 1. <img src="assets/img/tools/eraser1.png" width="40px" height="40px"></img>橡皮擦<br>
 
