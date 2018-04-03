@@ -69,7 +69,7 @@
 
 15. <img src="colorpick.JPG" width="110px" height="45px"></img>  調色盤<br>
 
-16. <img src="range.JPG" width="110px" height="45px"></img>  調色盤<br>
+16. <img src="range.JPG" width="110px" height="45px"></img>  文字畫筆粗細<br>
 
 
 
