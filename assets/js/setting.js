@@ -23,6 +23,14 @@ function chooseTool(name){
   canvasTmp.style.display = 'none';
   var link = document.getElementById(name).src;
   $('canvas').css('cursor', 'url(' + link + '), auto');
+  hasInput = true;
+  if(currentTool=='text'){
+    hasInput=false;
+    canvas.onclick = function (e) {
+      if (hasInput) return;
+      addInput(e.clientX, e.clientY);
+    }
+  }
 }
 
 function chooseShape(name){

@@ -49,8 +49,33 @@ function test1()
 
 
 </script>
+<script>
+  
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#animal").css('z-index', -1);
+    $("#headtext").css('z-index', -2);
+    $("#test11").css('z-index', -2);
+    $("#animal").animate({
+      opacity : '0',
+  });
+  $("#test11").animate({
+      opacity : '0',
+  });
+  $("#headtext").animate({
+      opacity : '0',
+  });
+  });
+});
+
+    
+</script>
+
 
 <body onload="init()" background="back1.jpg">
+  <div id="headtext">CANVAS</div>
+  <button class="test11" id="test11">START CANVAS</button>
+    <img src="animal.jpg" id="animal"></img>
 
     <input type="file" id="fileUpload" accept="image/*" style="display:none" name="upload"/> 
     <input   id ="fakepic" type="image"   src="upload.png"   onclick="test1()" width="50px" height="50px"> 
