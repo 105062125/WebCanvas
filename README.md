@@ -32,5 +32,12 @@
     * Delay will get 0 point (no reason)
     * Copy will get 0 point
     * "屍體" and 404 is not allowed
+    
+----------------------------------------------------------------------------------------------
+
+#My functions of my canvas
+
+1. <img src="assets/img/tools/eraser1.png" width="700px" height="500px"></img>橡皮擦<br>
+
 
 
