@@ -65,6 +65,12 @@
 
 13. <img src="upload.png" width="40px" height="40px"></img>上傳檔案<br>
 
+14. <img src="textpic.JPG" width="70px" height="20px"></img>  文字字形<br>
+
+15. <img src="colorpick.JPG" width="110px" height="45px"></img>  調色盤<br>
+
+16. <img src="range.JPG" width="110px" height="45px"></img>  調色盤<br>
+
 
 
 
