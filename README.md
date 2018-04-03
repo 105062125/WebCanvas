@@ -37,7 +37,7 @@
 
 #My functions of my canvas
 
-<img src="CANVAS.png" width="600px" height="400px"></img><br>
+<img src="CANVAS.png" width="500px" height="300px"></img><br>
 
 1. <img src="assets/img/tools/eraser1.png" width="40px" height="40px"></img>橡皮擦<br>
 
