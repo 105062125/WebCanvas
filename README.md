@@ -37,11 +37,11 @@
 
 #My functions of my canvas<br>
 
-開始-前景圖片
+開始-前景圖片<br>
 <img src="start.JPG" width="600px" height="400px"></img><br>
 <br>
 
-使用畫面
+使用畫面<br>
 <img src="canvas.JPG" width="600px" height="400px"></img><br>
 
 
