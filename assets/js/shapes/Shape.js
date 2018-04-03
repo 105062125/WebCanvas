@@ -12,6 +12,6 @@ class Shape{
   }
 
   draw(ctx) {
-
+    
   }
 }
