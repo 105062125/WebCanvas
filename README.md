@@ -77,6 +77,8 @@
 
 16. <img src="range.JPG" width="110px" height="45px"></img>  文字畫筆粗細<br>
 
+17. <img src="startbutton.JPG" width="140px" height="45px"></img>  開始canvas按鈕<br>
+
 
 
 
