@@ -124,7 +124,7 @@ function init() {
   ctxTmp.fillRect(0,0,w,h);
   ctx.beginPath();
   cPush();
-  //Cursor
+  //Cursor 
   $('canvas').css( 'cursor', 'url(assets/img/tools/pencil1.png), auto' );
   //Color box
   curColorBox = document.getElementById('color-quick-1');
