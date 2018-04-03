@@ -61,9 +61,9 @@
 
 8. <img src="redo.png" width="40px" height="40px"></img> Redo<br>
 
-9. <img src="circle_brush.png" width="40px" height="40px"></img>圓形筆觸<br>
+9. <img src="circle_brush.png" width="40px" height="40px"></img>圓形筆觸 (選鉛筆 然後粗細條大一點 可以看出來)<br>
 
-10. <img src="flat_brush.png" width="40px" height="40px"></img>方形筆觸<br>
+10. <img src="flat_brush.png" width="40px" height="40px"></img>方形筆觸 (選鉛筆 然後粗細條大一點 可以看出來)<br>
 
 11. <img src="clear.png" width="40px" height="40px"></img>清除<br>
 
