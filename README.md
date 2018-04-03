@@ -37,7 +37,37 @@
 
 #My functions of my canvas
 
-1. <img src="assets/img/tools/eraser1.png" width="700px" height="500px"></img>橡皮擦<br>
+<img src="CANVAS.png" width="600px" height="400px">
+
+
+1. <img src="assets/img/tools/eraser1.png" width="40px" height="40px"></img>橡皮擦<br>
+
+2. <img src="assets/img/tools/pencil1.png" width="40px" height="40px"></img>鉛筆<br>
+
+3. <img src="assets/img/shapes/rectangle1.png" width="40px" height="40px"></img>正方形筆刷<br>
+
+4. <img src="assets/img/shapes/ellipse1.png" width="40px" height="40px"></img>圓形筆刷<br>
+
+5. <img src="assets/img/shapes/equilateral1.png" width="40px" height="40px"></img>三角形筆刷<br>
+
+6. <img src="text.png" width="40px" height="40px"></img>輸入文字<br>
+
+7. <img src="undo.png" width="40px" height="40px"></img> Undo<br>
+
+8. <img src="redo.png" width="40px" height="40px"></img> Redo<br>
+
+9. <img src="circle_brush.png" width="40px" height="40px"></img>圓形筆觸<br>
+
+10. <img src="flat_brush.png" width="40px" height="40px"></img>方形筆觸<br>
+
+11. <img src="clear.png" width="40px" height="40px"></img>清除<br>
+
+12. <img src="download.png" width="40px" height="40px"></img>下載檔案
+
+13. <img src="upload.png" width="40px" height="40px"></img>上傳檔案<br>
+
+
+
 
 
 
